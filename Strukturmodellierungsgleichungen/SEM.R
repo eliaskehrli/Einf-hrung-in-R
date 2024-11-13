@@ -5,7 +5,7 @@ install.packages("psych", dependencies = TRUE)
 # Load packages
 library(lavaan)
 library(psych)
-----------------------------------------------
+
 # Load data from the folder where the data is stored
 my.data <- read.csv("/Users/eliaskehrli/Library/Mobile Documents/com~apple~CloudDocs/Uni/Master/Sport/SSR Basismodul/R-Stats/Strukturmodellierungsgleichungen/burnoutsport200.csv")
 
