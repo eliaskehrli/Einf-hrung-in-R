@@ -36,19 +36,11 @@ bo.ergebnis.varfehlt <- sem(model = bo.modell.varfehlt,
 # Display summary with fit measures and standardized results
 summary(bo.ergebnis.varfehlt, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)
 
-# Plot the SEM path diagram with customized appearance
-semPaths(
-  bo.ergebnis.varfehlt,
-  layout = "tree2",                      # Structured layout
-  whatLabels = "std",                    # Show standardized estimates on the paths
-  edge.label.cex = 0.8,                  # Adjust path label size
-  label.cex = 1.2,                       # Adjust node label size
-  edge.color = c(rep("darkgreen", 8), rep("blue", 4)), # Adjust path colors as needed
-  color = list(lat = "lightblue", man = "lightgrey"),  # Colors for latent and manifest variables
-  sizeMan = 8,                           # Size for manifest variable boxes
-  nCharNodes = 0                         # Show full variable names
-)
-
-# Add legend explanation:
-# - Blue arrows represent regression paths
-# - Green arrows represent factor loadings
+# Modell ohne die latente Variable Anforderungen
+semPaths(bo.ergebnis.varfehlt, 
+         rotation = 2, what = "std",  curvePivot = FALSE, exoVar = FALSE, 
+         edge.label.cex = 1.25, sizeMan = 7.5, sizeMan2 = 7.5)
+title("Reduziertes Modell\n(ohne Anforderungen)", line = 2,
+      sub = "Burnout-Daten",
+      cex.main = 1.0, font.main = 1, col.main = "blue",
+      cex.sub  = 1.0, font.sub  = 1, col.sub  = "black")
