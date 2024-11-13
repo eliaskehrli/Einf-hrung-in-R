@@ -1,7 +1,7 @@
 # Install packages
 install.packages("lavaan", dependencies = TRUE)
 install.packages("psych", dependencies = TRUE)
-
+--------------------------------------------
 # Load packages
 library(lavaan)
 library(psych)
@@ -14,7 +14,7 @@ View(data = my.data)
 psych::describe(my.data)
 
 
-# Define the model
+# Define the model for a CFA (confirmatory factor analysis)
 my.model <- '
 # latente Konstrukte definieren
 Perfektionismus =~ standards + selbstkritik + alles.nichts
@@ -27,12 +27,26 @@ Burnout ~~ Perfektionismus + Arbeitsanforderungen + OverCommitment
 Perfektionismus ~~ Arbeitsanforderungen + OverCommitment
 Arbeitsanforderungen ~~ OverCommitment
 '
+# CFA-Modell schaetzen
 
-# Fit the model
-fit <- cfa(model= my.model, data = my.data)
+?lavaan::sem
+cfa.ergebnis <- lavaan::sem(model = my.model,
+                            data = my.data,
+                            estimator = "mlr")
+# Note that the more specific function cfa() could have been 
+# used instead of sem()
+?"summary,lavaan-method" 
+# Wie immer: Der Wust ist ohne viel Hintergrundwissen schwer 
+# zu lesen und zu verstehen. Aber illustrative Anwendungsbeispiele 
+# mit den wesentlichen Parametern finden sich in der Hilfe ganz am Ende
 
-# Show the results
-summary(fit,fit.measures = TRUE)
+# Ausgabeoptionen mit mehr und mehr Ergebnissen
+summary(cfa.ergebnis)
+summary(cfa.ergebnis, fit.measures = TRUE, standardized = TRUE)
+summary(cfa.ergebnis, fit.measures = TRUE, standardized = TRUE,
+        rsquare = TRUE)
+
+
 
 
 
